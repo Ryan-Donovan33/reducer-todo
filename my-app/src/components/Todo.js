@@ -1,38 +1,16 @@
-import React, { useState, useReducer } from 'react';
+import React from 'react';
+import './Todo.css';
 
-import { initialState, todoReducer } from '../reducer/index';
+// const moment = require('moment');
 
-const Todo = () => {
-	const [ newTodo, setNewTodo ] = useState('');
-
-	const [ state, dispatch ] = useReducer(todoReducer, initialState);
-
-	const handleChanges = (e) => {
-		setNewTodo(e.target.value);
-	};
-
-	const editTodo = (e) => {
-		dispatch({ type: 'CHANGE_EDIT' });
-	};
-
-	const changeTodo = (e) => {
-		dispatch({ type: 'CHANGE_TODO', payload: newTodo });
-	};
-
-	return (
-		<div>
-			{state.editing ? (
-				<div>
-					<input className="todo-input" type="text" name="newTodo" value={newTodo} onChange={handleChanges} />
-					<button onClick={changeTodo}>Add Task</button>
-				</div>
-			) : (
-				<h1>
-					{state.title} <i className="todo-editing" onClick={editTodo} />
-				</h1>
-			)}
-		</div>
-	);
-};
-
-export default Todo;
+export default function Todo({ todo, toggleComplete }) {
+	console.log(todo);
+	if (todo) {
+		return (
+			<li className={todo.completed ? 'completed' : ''} onClick={() => toggleComplete(todo.id)}>
+				{todo.item}
+				{/* <span>...{moment(todo.timeCompleted).fromNow()}</span> */}
+			</li>
+		);
+	} else return <h1>Loading..</h1>;
+}
