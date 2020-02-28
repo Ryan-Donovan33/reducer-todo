@@ -7,7 +7,7 @@ export default function TodoList({ toggleComplete, todos }) {
 	console.log(todos);
 	if (todos) {
 		return (
-			<div>
+			<div className="todo-items">
 				<ul>
 					{todos.map((todo) => {
 						return <Todo key={todo.id} toggleComplete={toggleComplete} todo={todo} />;
